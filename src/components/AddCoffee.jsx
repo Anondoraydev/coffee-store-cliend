@@ -1,7 +1,34 @@
-import React from 'react'; 
-
 const AddCoffee = () => {
- 
+
+    const handleAddCoffee = event => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        // const quantity = form.quantity.value;
+        const supplier = form.supplier.value;
+        const taste = form.taste.value;
+        const category = form.category.value;
+        const details = form.details.value;
+        const photo = form.photo.value;
+
+        const newCoffee = { name, supplier, taste, category, details, photo };
+        console.log(newCoffee);
+
+        // send date to the server 
+        fetch('http://localhost:5000/coffee', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newCoffee)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+
+            })
+    }
+
     return (
         <div className='lg:w-3/4 mx-auto'>
             <div className="text-center p-10">
@@ -12,7 +39,7 @@ const AddCoffee = () => {
                 </p>
             </div>
             <div className="card bg-base-100 w-full shrink-0 shadow-2xl">
-                <form className="card-body">
+                <form onSubmit={handleAddCoffee} className="card-body">
                     {/* form first row */}
                     <div className='flex flex-col lg:flex-row gap-5'>
                         <div className="form-control flex-1">
