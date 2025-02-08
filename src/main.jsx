@@ -10,6 +10,7 @@ import Layout from './components/Layout.jsx';
 import Home from './components/Home.jsx';
 import AddCoffee from './components/AddCoffee.jsx';
 import UpdateCoffee from './components/UpdateCoffee.jsx';
+import App from './App.jsx';
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Home></Home>,
+        element: <App></App>,
         loader: () => fetch('http://localhost:5000/coffee')
       },
       {
