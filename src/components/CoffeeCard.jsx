@@ -1,18 +1,65 @@
+import { data } from 'autoprefixer';
 import React from 'react';
+import Swal from 'sweetalert2';
 
-const CoffeeCard = ({coffee}) => {
+const CoffeeCard = ({ coffee }) => {
+    const { _id, name, supplier, chef, taste, category, details, photo } = coffee;
+
+    const handleDelead = _id => {
+        console.log(_id);
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+
+            if (result.isConfirmed) {
+               
+
+                fetch(`http://localhost:5000/coffee/${_id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your Coffee has been deleted.",
+                                icon: "success"
+                            });
+                        }
+
+                    })
+
+            }
+        });
+
+    }
+
     return (
         <div className="card card-side bg-base-100 shadow-xl">
             <figure>
                 <img
-                    src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
-                    alt="Movie" />
+                    src={photo} alt="Movie" />
             </figure>
-            <div className="card-body">
-                <h2 className="card-title">New movie is released!</h2>
-                <p>Click the button to watch on Jetflix app.</p>
+            <div className=" flex justify-between w-full pr-5 p-4">
+                <div className='mt-8'>
+                    <h2 className="card-title">Name: {name}</h2>
+                    <p>Chef: {chef}</p>
+                    <p>Taste: {taste}</p>
+                </div>
                 <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Watch</button>
+                    <div className="join join-vertical space-y-2">
+                        <button className="btn join-item">View</button>
+                        <button className="btn join-item">Edit</button>
+                        <button onClick={() => handleDelead(_id)} className="btn join-item">X</button>
+                    </div>
                 </div>
             </div>
         </div>

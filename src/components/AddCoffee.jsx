@@ -12,8 +12,9 @@ const AddCoffee = () => {
         const category = form.category.value;
         const details = form.details.value;
         const photo = form.photo.value;
+        const chef = form.chef.value;
 
-        const newCoffee = { name, supplier, taste, category, details, photo };
+        const newCoffee = { name, chef, supplier, taste, category, details, photo };
         console.log(newCoffee);
 
         // send date to the server 
