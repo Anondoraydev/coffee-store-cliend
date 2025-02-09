@@ -1,5 +1,6 @@
 import { data } from 'autoprefixer';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const CoffeeCard = ({ coffee }) => {
@@ -19,7 +20,7 @@ const CoffeeCard = ({ coffee }) => {
         }).then((result) => {
 
             if (result.isConfirmed) {
-               
+
 
                 fetch(`http://localhost:5000/coffee/${_id}`, {
                     method: 'DELETE'
@@ -57,7 +58,9 @@ const CoffeeCard = ({ coffee }) => {
                 <div className="card-actions justify-end">
                     <div className="join join-vertical space-y-2">
                         <button className="btn join-item">View</button>
-                        <button className="btn join-item">Edit</button>
+                        <Link to={`updateCoffee/${_id}`}>
+                            <button className="btn join-item">Edit</button>
+                        </Link>
                         <button onClick={() => handleDelead(_id)} className="btn join-item">X</button>
                     </div>
                 </div>
