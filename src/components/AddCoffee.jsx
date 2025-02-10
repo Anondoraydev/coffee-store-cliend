@@ -18,7 +18,7 @@ const AddCoffee = () => {
         console.log(newCoffee);
 
         // send date to the server 
-        fetch(`http://localhost:5000/coffee${_id }`, {
+        fetch(`http://localhost:5000/coffee/${_id}`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
