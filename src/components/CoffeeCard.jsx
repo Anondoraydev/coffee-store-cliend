@@ -32,7 +32,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
                             Swal.fire(
                                 "Deleted!",
                                 "Your Coffee has been deleted.",
-                                "success"
+                                "success " 
                             );
                             const remaining =coffees.filter(cof=>cof._id !== _id);
                             setCoffees(remaining)
